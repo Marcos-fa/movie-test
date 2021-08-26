@@ -1,25 +1,50 @@
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react'
 import './App.css';
+import Login from './components/login';
+import {ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+import Movies from './components/movies';
+const axios = require('axios');
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [logged, setLogged] = useState(false);
+    const [signin, setSignin] = useState(true);
+
+    const isLogged = async (value) => {
+        setLogged(value)
+    }
+
+    const logOut = async () => {
+        // let result = await axios.get('http://localhost:4000/logout');
+        // console.log(result);
+    }
+    
+    return (
+        <div className="App">
+            <div>
+            <nav className="navbar navbar-dark bg-dark">
+                <div className="container-fluid">
+                    <small className="navbar-brand" href="#">Marcos Test</small>
+                   
+                    {logged ? 
+                        <div className="d-flex">
+                            <small className="nav-link" type="submit" onClick={() => setSignin(true), () => logOut() }>log Out</small>
+                        </div>
+                        :
+                        <div className="d-flex">
+                            <small className="nav-link" type="submit" onClick={() => setSignin(true)}>Sign In</small>
+                            <small className="nav-link" type="submit" onClick={() => setSignin(false)}>Sign Up</small>
+                        </div>
+                    }
+                    
+                </div>
+            </nav>
+
+            { !logged ? <Login {...{signin, isLogged}}/> :  <Movies/>}
+            </div>
+            <ToastContainer/>
+        </div>
+    );
 }
 
 export default App;
