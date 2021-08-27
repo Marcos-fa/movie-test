@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 const axios = require('axios');
 
@@ -56,16 +56,16 @@ function Login(props) {
             <form className="card card-body m-auto col-4" onSubmit={handleSubmit} >
                 <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">Username</label>
-                    <input type="text" className="form-control" name="username" onChange={handleInputChange} id="exampleInputEmail1" aria-describedby="emailHelp" />
+                    <input type="text" className="form-control" name="username" onChange={handleInputChange} id="exampleInputEmail1"/>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">Password</label>
-                    <input type="password" className="form-control" name="password" onChange={handleInputChange} id="exampleInputEmail1" aria-describedby="emailHelp" />
+                    <input type="password" className="form-control" name="password" onChange={handleInputChange} id="exampleInputEmail1"/>
                 </div>
                 {!props.signin ?
                     <div className="mb-3">
                         <label htmlFor="exampleInputEmail1" className="form-label">Confirm Password</label>
-                        <input type="password" className="form-control" name="confirmPassword" onChange={handleInputChange} id="exampleInputEmail1" aria-describedby="emailHelp" />
+                        <input type="password" className="form-control" name="confirmPassword" onChange={handleInputChange} id="exampleInputEmail1"/>
                     </div>
                     : null
                 }

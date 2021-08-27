@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import './App.css';
 import Login from './components/login';
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Movies from './components/movies';
-const axios = require('axios');
 
 function App() {
     const [logged, setLogged] = useState(false);
