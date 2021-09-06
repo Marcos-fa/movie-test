@@ -8,9 +8,14 @@ import Movies from './components/movies';
 function App() {
     const [logged, setLogged] = useState(false);
     const [signin, setSignin] = useState(true);
+    const [user, setUser] = useState({});
 
     const isLogged = async (value) => {
         setLogged(value)
+    }
+
+    const actualUser = async (userLogged) => {
+        setUser(userLogged);
     }
 
     const logOut = async () => {
@@ -39,7 +44,7 @@ function App() {
                 </div>
             </nav>
 
-            { !logged ? <Login {...{signin, isLogged}}/> :  <Movies/>}
+            { !logged ? <Login {...{signin, isLogged, actualUser}}/> :  <Movies {...{user}}/>}
             </div>
             <ToastContainer/>
         </div>

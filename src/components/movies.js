@@ -6,9 +6,18 @@ import Swal from 'sweetalert2';
 
 
 
-function Movies() {
+function Movies(props) {
+
+    const initialStateValues = {
+        idUser: '',
+        idMovie: '',
+        comment: '',
+    }
+
     const [movieId, setMovieId] = useState('');
     const [Movies, setMovies] = useState([]);
+    const [idTextComment, setIdTextComment] = useState('');
+    const [comment, setComment] = useState(initialStateValues);
 
     const addOrEditMovie = async (values) => {
         try {
@@ -45,9 +54,33 @@ function Movies() {
         }
     }
 
+    const handleInputChange = async (e) => {
+        const { name, value } = e.target;
+        console.log(name, value)
+        setComment({ ...comment, [name]: value })
+    };
+
+    const handleSubmit = async e => {
+        console.log('entra a submit')
+        e.preventDefault();
+        console.log(comment)
+        if (!comment.comment) {
+            toast(`Please add comment`, {type: 'warning', autoClose: 2000}); 
+        }else{
+            
+        }
+        
+    }
+
+
+
     useEffect(() => {
+        console.log(props.user)
+        if (props.user.length > 1) {
+            setComment( { ...comment, idUser: props.user.user._id})
+        }
         getMovies();
-    }, []);
+    }, [props.user]);
 
     return (
         <div className="container">
@@ -65,6 +98,24 @@ function Movies() {
                             </div>
                             <p>Gender: {movie.gender}</p>
                             <p>Description: {movie.description}</p>
+                            <div className="d-flex flex-row justify-content-between">
+                                <div onClick={() => setIdTextComment(movie._id)}>Add comment</div>
+                                <div>show comments</div>   
+                            </div>
+                            {idTextComment === movie._id?
+                                <form onSubmit={handleSubmit}>
+                                    <div>
+                                        <label className="form-label">Comment</label>
+                                        <textarea name="comment" rows="3" className="form-control" placeholder="Write a comment"
+                                            onChange={handleInputChange} value={comment.comment} ></textarea>
+                                    </div>
+                                    <div>
+                                        <i className="btn btn-danger" onClick={() => setIdTextComment('')} >Cancel</i>
+                                        <i className="btn btn-primary" type="submit" >Add</i>
+                                    </div>
+                                </form>
+                                :null
+                            }
                         </div>
                     </div>
                 ))}

@@ -27,14 +27,15 @@ function Login(props) {
             try {
                 let result = await axios.post('http://localhost:4000/signin', values);
                 toast('WELCOME BACK ' + result.data.user.username.toUpperCase(), {type: 'success', autoClose: 2000});
-                console.log('result : ', result);
+                console.log('result : ', result.data.user._id); 
                 props.isLogged(true);
+                props.actualUser(result.data);
             } catch (err) {
                 console.log(err)
                 toast('Password or username incorrect', { type: 'error', autoClose: 2000 });
             }
         } else {
-            if (values.password !== values.confirmPassword) {
+            if (values.password != values.confirmPassword) {
                 console.log('object')
                 toast('Passwords must match', { type: 'error', autoClose: 2000 });
                 return;
