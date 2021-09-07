@@ -35,7 +35,7 @@ function Login(props) {
                 toast('Password or username incorrect', { type: 'error', autoClose: 2000 });
             }
         } else {
-            if (values.password != values.confirmPassword) {
+            if (values.password !== values.confirmPassword) {
                 console.log('object')
                 toast('Passwords must match', { type: 'error', autoClose: 2000 });
                 return;
